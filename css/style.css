@@ -1,0 +1,48 @@
+/* 整體頁面：置中顯示，淺灰背景 */
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+/* 表單：白底、加框、固定寬度 */
+form {
+  background: white;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  width: 300px;
+}
+
+h2 { margin-top: 0; }
+
+/* 輸入框：寬度填滿、下方留白 */
+input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+/* 按鈕：寬度填滿、深紫色 */
+button {
+  width: 100%;
+  padding: 0.5rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover { background: #4338ca; }
+
+/* 訊息文字：成功為綠色、錯誤為紅色 */
+.msg { margin-bottom: 1rem; font-size: 0.875rem; }
+.error { color: red; }
+.success { color: green; }
+
+a { font-size: 0.875rem; }

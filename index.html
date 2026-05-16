@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>登入</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<form id="form">
+  <h2>登入</h2>
+
+  <!-- 顯示錯誤訊息 -->
+  <p class="msg error" id="msg" style="display:none;"></p>
+
+  <input type="text" id="account" placeholder="帳號" />
+  <input type="password" id="password" placeholder="密碼" />
+  <button type="submit">登入</button>
+  <br><br>
+  <a href="register.html">還沒有帳號？前往註冊</a>
+</form>
+
+<!-- 載入 API 客戶端 -->
+<script src="js/api.js"></script>
+<script>
+  // 已登入則直接跳轉到個人資料頁，不需重新登入
+  if (api.isLoggedIn()) location.href = 'dashboard.html';
+
+  document.getElementById('form').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const msg = document.getElementById('msg');
+    msg.style.display = 'none';
+
+    try {
+      // 呼叫登入 API，成功後跳轉到個人資料頁
+      await api.login(
+        document.getElementById('account').value,
+        document.getElementById('password').value
+      );
+      location.href = 'dashboard.html';
+    } catch (err) {
+      // 登入失敗，顯示錯誤訊息
+      msg.textContent = friendlyError(err);
+      msg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

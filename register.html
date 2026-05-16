@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>註冊</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<form id="form">
+  <h2>註冊</h2>
+
+  <!-- 顯示成功或錯誤訊息 -->
+  <p class="msg" id="msg" style="display:none;"></p>
+
+  <!-- 帳號：只允許英數字及底線，3–50 字元 -->
+  <input type="text" id="account" placeholder="帳號（英數字及底線，3–50 字元）" />
+
+  <!-- 電子郵件 -->
+  <input type="email" id="email" placeholder="電子郵件" />
+
+  <!-- 密碼：至少 8 字元 -->
+  <input type="password" id="password" placeholder="密碼（至少 8 字元）" />
+
+  <button type="submit">建立帳號</button>
+  <br><br>
+  <a href="index.html">已有帳號？前往登入</a>
+</form>
+
+<!-- 載入 API 客戶端 -->
+<script src="js/api.js"></script>
+<script>
+  document.getElementById('form').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const msg = document.getElementById('msg');
+    msg.style.display = 'none';
+
+    try {
+      // 呼叫註冊 API（回傳 201，無內容）
+      await api.register(
+        document.getElementById('account').value,
+        document.getElementById('email').value,
+        document.getElementById('password').value
+      );
+
+      // 註冊成功，顯示訊息並於 2 秒後跳轉到登入頁
+      msg.className = 'msg success';
+      msg.textContent = '註冊成功！2 秒後跳轉至登入頁...';
+      msg.style.display = 'block';
+      setTimeout(() => location.href = 'index.html', 2000);
+    } catch (err) {
+      // 註冊失敗，顯示錯誤訊息
+      msg.className = 'msg error';
+      msg.textContent = friendlyError(err);
+      msg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

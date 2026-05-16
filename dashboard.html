@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>個人資料</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<form>
+  <h2>個人資料</h2>
+
+  <!-- 個人資料顯示區，載入完成前顯示「載入中...」 -->
+  <p id="info">載入中...</p>
+
+  <button type="button" onclick="handleLogout()">登出</button>
+</form>
+
+<!-- 載入 API 客戶端 -->
+<script src="js/api.js"></script>
+<script>
+  // 未登入則跳轉回登入頁
+  if (!api.isLoggedIn()) location.href = 'index.html';
+
+  // 頁面載入後自動取得個人資料
+  (async () => {
+    try {
+      const p = await api.getProfile();
+
+      // 將使用者資料顯示在頁面上
+      document.getElementById('info').innerHTML =
+        `帳號：${p.account}<br>
+         Email：${p.email}<br>
+         顯示名稱：${p.displayName || '（未設定）'}<br>
+         建立時間：${new Date(p.createdAt).toLocaleString('zh-TW')}`;
+    } catch {
+      // 取得資料失敗（token 無效等），跳回登入頁
+      location.href = 'index.html';
+    }
+  })();
+
+  // 登出：呼叫 API 廢止 token 後跳回登入頁
+  async function handleLogout() {
+    await api.logout();
+    location.href = 'index.html';
+  }
+</script>
+
+</body>
+</html>
