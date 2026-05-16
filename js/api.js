@@ -1,8 +1,7 @@
 // API 客戶端
 // 後端專案：https://github.com/Emily0606/AccountSystem
 // 開發時用 localhost，部署後改成後端的公開網址
-// 例如：'https://your-backend.com' 或 'http://your-server-ip:8080'
-const API_BASE = 'http://localhost:8080';
+const API_BASE = 'https://accountsystem-070u.onrender.com';
 
 // ── Token 管理 ─────────────────────────────────────────────────────────────
 // JWT Token 存放在 localStorage，鍵值以 ast_ 為前綴避免命名衝突
