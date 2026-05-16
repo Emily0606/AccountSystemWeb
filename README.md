@@ -50,4 +50,3 @@ const API_BASE = 'http://localhost:8080';
 
 - 後端專案：[Emily0606/AccountSystem](https://github.com/Emily0606/AccountSystem)
 - API 文件（後端啟動後）：`http://localhost:8080/swagger-ui.html`
-- 系統分析報告：[ANALYSIS_REPORT.md](ANALYSIS_REPORT.md)
